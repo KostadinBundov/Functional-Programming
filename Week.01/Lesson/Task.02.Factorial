@@ -1,0 +1,28 @@
+main :: IO()
+main = do
+    print $ factRec 5 == 120
+    print $ factRec 11 == 39916800
+    print $ factIter 5 1 == 120
+    print $ test 5 1 == 120
+
+   
+factRec :: Int -> Int
+factRec 0 = 1
+factRec x
+ | x < 0 = error "x has to be non negative"
+ | otherwise = x * factRec (x - 1)
+
+factIter :: Int -> Int
+factIter x = helper x 1
+ where 
+    helper :: Int -> Int -> Int
+    helper 0 result = result
+    helper leftover result = helper (leftover - 1) (result * leftover) 
+
+test :: Int -> Int -> Int
+test 0 result = result
+test input result = test (input - 1) (result * input)
+
+
+-- Използваме pattern matching, за да опишем corner cases на една наша функция, тоест какво очакваме да бъде върнато при определени входни данни
+
